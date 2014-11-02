@@ -19,6 +19,7 @@ public class LivroBean {
 
 	private Livro livro = new Livro();
 	private Integer autorId;
+	private List<Livro> livros;
 	
 	
 	public void setAutorId(Integer autorId) {
@@ -62,8 +63,18 @@ public class LivroBean {
 	public void comecaComDigitoUm(FacesContext fc, UIComponent component, Object value)throws ValidatorException{
 		 String valor = value.toString();
 		 if(!valor.startsWith("1")) {
-			 throw new ValidatorException(new FacesMessage("Deveria começar com 1"));
+			 throw new ValidatorException(new FacesMessage("ISBN Deveria começar com 1"));
 		 }
+	}
+
+	public List<Livro> getLivros() {
+		
+		this.livros = new DAO<Livro>(Livro.class).listaTodos();
+		return this.livros;
+	}
+
+	public void setLivros(List<Livro> livros) {
+		this.livros = livros;
 	}
 
 }
